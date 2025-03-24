@@ -1,9 +1,10 @@
 import { useState } from "react";
 import clickTree from "./assets/tiny-swords/single-tree.png";
 import "./App.css";
-import Shop from "./Shop";
+import Shop from "./components/Shop/Shop";
 
 function App() {
+  const [money, setMoney] = useState(11);
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
 
@@ -33,7 +34,12 @@ function App() {
     <>
       <div className="wrapper">
         <div className="main">
-          <Shop multiplier={multiplier} setMultiplier={setMultiplier} />
+          <Shop
+            multiplier={multiplier}
+            setMultiplier={setMultiplier}
+            money={money}
+            setMoney={setMoney}
+          />
           <div className="field">
             <div className="tree-button">
               <button onClick={plantTree}>

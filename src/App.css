@@ -31,8 +31,13 @@ button {
   transition: transform 0.2s ease-in-out;
 }
 
-button:hover {
+button:enabled:hover {
   transform: scale(1.1);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 progress {

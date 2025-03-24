@@ -5,18 +5,25 @@
   padding: 16px;
 }
 
-.item {
+.shop-header {
   display: flex;
-  padding: 8px;
-  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  max-height: 32px;
 }
 
-.shopButton {
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  gap: 8px;
+}
+
+.shop-button {
   background-color: #499c59;
   color: #f7f45f;
   padding: 6px;
   border-radius: 16px;
   width: 64px;
-  cursor: pointer;
-  transition:;
+  height: 32px;
 }
