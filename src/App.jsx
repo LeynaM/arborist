@@ -1,5 +1,5 @@
 import { useState } from "react";
-import clickTree from "./assets/tiny-swords/Resources/Trees/single-tree.png";
+import clickTree from "./assets/tiny-swords/single-tree.png";
 import "./App.css";
 import Shop from "./Shop";
 
