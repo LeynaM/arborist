@@ -1,0 +1,53 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree-button {
+  z-index: 1;
+}
+
+button {
+  font-size: 12pt;
+  width: 100%;
+  border-radius: 50%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+progress {
+  height: 24px;
+  background-color: #6e260e;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #6e260e;
+}
+
+progress::-webkit-progress-value {
+  background-color: #499c59;
+}
+
+progress::-moz-progress-bar {
+  background-color: #499c59;
+}
