@@ -1,0 +1,7 @@
+.tooltip__content {
+  background-color: #242424;
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 200px;
+  width: fit-content;
+}
