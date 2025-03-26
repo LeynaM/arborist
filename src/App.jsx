@@ -9,7 +9,9 @@ function App() {
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
 
+  const fieldRef = useRef(null);
   const rateRef = useRef(0);
+  const treeRef = useRef([]);
 
   useEffect(() => {
     rateRef.current = count * 0.1;
@@ -27,22 +29,20 @@ function App() {
     setMoney((prevMoney) => prevMoney - multiplier);
     setCount((prevCount) => prevCount + multiplier);
 
-    const field = document.querySelector(".field");
+    treeRef.current.push({
+      top: getTop(),
+      left: getLeft(),
+    });
+  }
 
-    const fieldWidth = field.clientWidth;
-    const fieldHeight = field.clientHeight;
+  function getLeft() {
+    const fieldWidth = fieldRef.current.clientWidth;
+    return Math.random() * (fieldWidth - 15);
+  }
 
-    for (let i = 0; i < multiplier; i++) {
-      const randomX = Math.random() * (fieldWidth - 15);
-      const randomY = Math.random() * (fieldHeight - 15);
-      const tree = document.createElement("img");
-      tree.src = clickTree;
-      tree.style.position = "absolute";
-      tree.style.width = "15px";
-      tree.style.left = `${randomX}px`;
-      tree.style.top = `${randomY}px`;
-      field.appendChild(tree);
-    }
+  function getTop() {
+    const fieldHeight = fieldRef.current.clientHeight;
+    return Math.random() * (fieldHeight - 15);
   }
 
   return (
@@ -58,8 +58,16 @@ function App() {
             />
             <Stats multiplier={multiplier} money={money} count={count} />
           </div>
-          <div className={styles.field}>
-            <div className={styles["tree-button"]}>
+          <div ref={fieldRef} className={styles.field}>
+            {treeRef.current.map((tree, index) => (
+              <img
+                key={index}
+                src={clickTree}
+                className={styles["mini-tree"]}
+                style={{ top: tree.top, left: tree.left }}
+              />
+            ))}
+            <div>
               <button onClick={plantTree} disabled={money < 1}>
                 <img src={clickTree} />
               </button>
