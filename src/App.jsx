@@ -9,7 +9,6 @@ function App() {
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
 
-  const fieldRef = useRef(null);
   const rateRef = useRef(0);
   const treeRef = useRef([]);
 
@@ -30,19 +29,9 @@ function App() {
     setCount((prevCount) => prevCount + multiplier);
 
     treeRef.current.push({
-      top: getTop(),
-      left: getLeft(),
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
     });
-  }
-
-  function getLeft() {
-    const fieldWidth = fieldRef.current.clientWidth;
-    return Math.random() * (fieldWidth - 15);
-  }
-
-  function getTop() {
-    const fieldHeight = fieldRef.current.clientHeight;
-    return Math.random() * (fieldHeight - 15);
   }
 
   return (
@@ -58,7 +47,7 @@ function App() {
             />
             <Stats multiplier={multiplier} money={money} count={count} />
           </div>
-          <div ref={fieldRef} className={styles.field}>
+          <div className={styles.field}>
             {treeRef.current.map((tree, index) => (
               <img
                 key={index}
