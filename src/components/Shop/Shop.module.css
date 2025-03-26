@@ -22,8 +22,9 @@
 .shop-button {
   background-color: #499c59;
   color: #f7f45f;
-  padding: 6px;
+  padding: 8px;
   border-radius: 16px;
-  width: 64px;
-  height: 32px;
+  width: max-content;
+  text-wrap: nowrap;
+  height: fit-content;
 }

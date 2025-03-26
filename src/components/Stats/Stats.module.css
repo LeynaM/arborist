@@ -1,0 +1,19 @@
+.stats {
+  background-color: #242424;
+  color: #f7f45f;
+  padding: 16px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+  font-size: 16pt;
+}

@@ -56,3 +56,10 @@ progress::-webkit-progress-value {
 progress::-moz-progress-bar {
   background-color: #499c59;
 }
+
+.left-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}

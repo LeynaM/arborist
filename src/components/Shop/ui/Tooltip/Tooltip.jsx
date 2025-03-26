@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Tooltip } from "radix-ui";
-import "./tooltip.css";
+import styles from "./tooltip.module.css";
 
 function MyTooltip({ content, children }) {
   return (
@@ -8,7 +8,7 @@ function MyTooltip({ content, children }) {
       <Tooltip.Root>
         <Tooltip.Trigger asChild>{children}</Tooltip.Trigger>
         <Tooltip.Portal>
-          <Tooltip.Content side="right" className="tooltip__content">
+          <Tooltip.Content side="right" className={styles["tooltip__content"]}>
             {content}
             <Tooltip.Arrow />
           </Tooltip.Content>
