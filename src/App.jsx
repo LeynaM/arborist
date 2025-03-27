@@ -3,11 +3,13 @@ import clickTree from "./assets/tiny-swords/single-tree.png";
 import styles from "./App.module.css";
 import Shop from "./components/Shop/Shop";
 import Stats from "./components/Stats/Stats";
+import Notifications from "./components/Notifications/Notifications";
 
 function App() {
   const [money, setMoney] = useState(10);
   const [count, setCount] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
+  const [open, setOpen] = useState(false);
 
   const rateRef = useRef(0);
   const treeRef = useRef([]);
@@ -62,6 +64,10 @@ function App() {
               </button>
               <p>{count} trees planted</p>
             </div>
+          </div>
+          <div>
+            <button onClick={() => setOpen(true)}>Show Notification</button>
+            <Notifications open={open} setOpen={setOpen} />
           </div>
         </div>
         <progress value={count} max="10000"></progress>
