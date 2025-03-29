@@ -1,0 +1,16 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  gap: 8px;
+}
+
+.shop-button {
+  background-color: #499c59;
+  color: #f7f45f;
+  padding: 8px;
+  border-radius: 16px;
+  width: max-content;
+  text-wrap: nowrap;
+  height: fit-content;
+}

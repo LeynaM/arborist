@@ -1,12 +1,12 @@
 import styles from "./Stats.module.css";
 
-function Stats({ multiplier, money, count }) {
+function Stats({ multiplier, money, count, rate }) {
   return (
     <div className={styles.stats}>
       <h2>Stats</h2>
       <ul>
-        <li>Current multiplier: {multiplier}</li>
-        <li>Cost per tree: {100 / multiplier}p</li>
+        <li>Click planting multiplier: {multiplier}</li>
+        <li>Income rate: {rate.toFixed(2)} 🪙/s</li>
       </ul>
     </div>
   );

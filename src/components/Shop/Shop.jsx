@@ -1,9 +1,22 @@
 import styles from "./Shop.module.css";
-import { inventory } from "./inventory";
+import { inventory, effectTypes } from "./inventory";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import MyTooltip from "./ui/Tooltip/Tooltip";
+import ShopItem from "./ShopItem/ShopItem";
 
-function Shop({ multiplier, setMultiplier, money, setMoney }) {
+function Shop({
+  incomeRateRef,
+  plantingRateRef,
+  multiplierRef,
+  money,
+  setMoney,
+}) {
+  const STAT = {
+    [effectTypes.CLICK_MULTIPLIER]: multiplierRef,
+    [effectTypes.PASSIVE_INCOME]: incomeRateRef,
+    [effectTypes.PASSIVE_PLANTING]: plantingRateRef,
+  };
+
   return (
     <div className={styles.shop}>
       <div className={styles["shop-header"]}>
@@ -11,21 +24,13 @@ function Shop({ multiplier, setMultiplier, money, setMoney }) {
         <h2>💰 {Math.floor(money)}</h2>
       </div>
       {inventory.map((item, index) => (
-        <div key={index} className={styles.item}>
-          <p>{item.name}</p>
-          <MyTooltip content={item.description}>
-            <button
-              className={styles["shop-button"]}
-              disabled={money < item.cost}
-              onClick={() => {
-                setMultiplier(item.effect);
-                setMoney((prevMoney) => prevMoney - item.cost);
-              }}
-            >
-              {item.cost} 🪙
-            </button>
-          </MyTooltip>
-        </div>
+        <ShopItem
+          key={index}
+          item={item}
+          money={money}
+          setMoney={setMoney}
+          statRef={STAT[item.type]}
+        />
       ))}
     </div>
   );

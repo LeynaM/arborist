@@ -3,38 +3,44 @@ import clickTree from "./assets/tiny-swords/single-tree.png";
 import styles from "./App.module.css";
 import Shop from "./components/Shop/Shop";
 import Stats from "./components/Stats/Stats";
-import Notifications from "./components/Notifications/Notifications";
 
 function App() {
   const [money, setMoney] = useState(10);
   const [count, setCount] = useState(0);
-  const [multiplier, setMultiplier] = useState(1);
-  const [open, setOpen] = useState(false);
 
-  const rateRef = useRef(0);
+  const multiplierRef = useRef(1);
+  const incomeRateRef = useRef(0);
+  const plantingRateRef = useRef(0);
   const treeRef = useRef([]);
 
+  const plantTree = (numberToPlant) => {
+    setCount((prevCount) => prevCount + numberToPlant);
+
+    for (let i = 0; i < numberToPlant; i++) {
+      treeRef.current.push({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+      });
+    }
+  };
+
+  const manualPlanting = () => {
+    setMoney((prevMoney) => prevMoney - 1);
+    plantTree(multiplierRef.current);
+  };
+
   useEffect(() => {
-    rateRef.current = count * 0.1;
+    incomeRateRef.current = count * 0.1;
   }, [count]);
 
   useEffect(() => {
     const incomeInterval = setInterval(() => {
-      setMoney((prevMoney) => prevMoney + rateRef.current);
+      setMoney((prevMoney) => prevMoney + incomeRateRef.current);
+      plantTree(plantingRateRef.current);
     }, 1000);
 
     return () => clearInterval(incomeInterval);
   }, []);
-
-  function plantTree() {
-    setMoney((prevMoney) => prevMoney - multiplier);
-    setCount((prevCount) => prevCount + multiplier);
-
-    treeRef.current.push({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-    });
-  }
 
   return (
     <>
@@ -42,12 +48,18 @@ function App() {
         <div className={styles.main}>
           <div className={styles["left-panel"]}>
             <Shop
-              multiplier={multiplier}
-              setMultiplier={setMultiplier}
+              incomeRateRef={incomeRateRef}
+              plantingRateRef={plantingRateRef}
+              multiplierRef={multiplierRef}
               money={money}
               setMoney={setMoney}
             />
-            <Stats multiplier={multiplier} money={money} count={count} />
+            <Stats
+              multiplier={multiplierRef.current}
+              money={money}
+              count={count}
+              rate={incomeRateRef.current}
+            />
           </div>
           <div className={styles.field}>
             {treeRef.current.map((tree, index) => (
@@ -59,15 +71,11 @@ function App() {
               />
             ))}
             <div>
-              <button onClick={plantTree} disabled={money < 1}>
+              <button onClick={manualPlanting} disabled={money < 1}>
                 <img src={clickTree} />
               </button>
               <p>{count} trees planted</p>
             </div>
-          </div>
-          <div>
-            <button onClick={() => setOpen(true)}>Show Notification</button>
-            <Notifications open={open} setOpen={setOpen} />
           </div>
         </div>
         <progress value={count} max="10000"></progress>
