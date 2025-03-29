@@ -10,6 +10,7 @@ function App() {
 
   const multiplierRef = useRef(1);
   const incomeRateRef = useRef(0);
+  const treeIncomeRateRef = useRef(0);
   const plantingRateRef = useRef(0);
   const treeRef = useRef([]);
 
@@ -30,12 +31,15 @@ function App() {
   };
 
   useEffect(() => {
-    incomeRateRef.current = count * 0.1;
+    treeIncomeRateRef.current = count * 0.1;
   }, [count]);
 
   useEffect(() => {
     const incomeInterval = setInterval(() => {
-      setMoney((prevMoney) => prevMoney + incomeRateRef.current);
+      setMoney(
+        (prevMoney) =>
+          prevMoney + incomeRateRef.current + treeIncomeRateRef.current,
+      );
       plantTree(plantingRateRef.current);
     }, 1000);
 
@@ -58,7 +62,7 @@ function App() {
               multiplier={multiplierRef.current}
               money={money}
               count={count}
-              rate={incomeRateRef.current}
+              rate={incomeRateRef.current + treeIncomeRateRef.current}
             />
           </div>
           <div className={styles.field}>
